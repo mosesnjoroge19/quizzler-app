@@ -4,7 +4,7 @@ class Question{
   bool questionanswer;
 
   //Constructor to set values for properties in a new object
-  Question({String q, bool a}){
+  Question(String q, bool a){
     questionText = q;
     questionanswer = a;
   }
