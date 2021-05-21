@@ -5,6 +5,7 @@ void main() => runApp(Quizzler());
 
 //instantiate QuizBrain
 QuizBrain quizBrain = QuizBrain();
+
 class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,18 +32,16 @@ class _QuizPageState extends State<QuizPage> {
   //Wrapping the bottom screen score keeper in a List
   List<Icon> scoreKeeper = [];
 
-  //Wrap the questions in a List
-  // List<String> queries = [
-  //   'You can lead a cow down stairs but not up stairs.',
-  //   'Approximately one quarter of human bones are in the feet.',
-  //   'A slug\'s blood is green.',
-  // ];
+  // new function to check answers validity
 
-  //integer variable for a question's index
-  
-
-  // //List of correct answers
-  // List<bool> correctAnswers = [false, true, true];
+  void checkAnswers(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getAnswerValue();
+    if (correctAnswer == userPickedAnswer) {
+      return scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+    } else {
+      return scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +78,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(Icon(
-                    Icons.check,
-                    color: Colors.green,
-                  ));
                   //validate the user's input against the correct answer
-                  bool correctAnswer = quizBrain.getAnswerValue();
-                  if (correctAnswer == true) {
-                    print('Yaaay!!! You got it right');
-                  } else {
-                    print('Buzzards! Wrong');
-                  }
-
-                  //TODO insert queryNumber tracker
-                  quizBrain.nextQuestion();
-                 
+                  checkAnswers(true);
                 });
+                quizBrain.nextQuestion();
                 //The user picked true.
                 // +
               },
@@ -119,21 +106,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(Icons.close, color: Colors.red),
-                  );
-                  bool correctAnswer = quizBrain.getAnswerValue();
-                  if (correctAnswer == false) {
-                    print('Yaaay!!! You got it right');
-                  } else {
-                    print('Buzzards! Wrong');
-                  }
-
-                  //TODO insert queryNumber tracker
-                  quizBrain.nextQuestion();
-                  
+                  checkAnswers(false);
                 });
                 //The user picked false.
+
+                quizBrain.nextQuestion();
               },
             ),
           ),
