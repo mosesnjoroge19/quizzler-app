@@ -6,8 +6,5 @@ class Question{
   //Constructor to set values for properties in a new object
 
   //better code technique to set constructors
-  Question(String q, bool a){
-    questionText = q;
-    questionanswer = a;
-  }
+  Question(this.questionText, this.questionanswer) {}
 }
