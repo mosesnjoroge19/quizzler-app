@@ -6,5 +6,5 @@ class Question{
   //Constructor to set values for properties in a new object
 
   //better code technique to set constructors
-  Question(this.questionText, this.questionanswer) {}
+  Question(this.questionText, this.questionanswer); 
 }
