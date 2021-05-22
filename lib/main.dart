@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
@@ -36,10 +37,22 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswers(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getAnswerValue();
-    if (correctAnswer == userPickedAnswer) {
-      return scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+
+    if (quizBrain.isFinished() == true) {
+      Alert(
+              context: context,
+              title: 'COMPLETE!',
+              desc: "Congrats! You've completed the quiz.")
+          .show();
+
+      scoreKeeper.clear();
+      // quizBrain.reset();
     } else {
-      return scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+      if (correctAnswer == userPickedAnswer) {
+        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+      }
     }
   }
 

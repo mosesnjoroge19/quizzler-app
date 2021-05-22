@@ -42,7 +42,7 @@ class QuizBrain{
       _queryNumber++;
     }
     else{
-      _queryNumber = 0;
+      reset();
     }
   }
   //a getter function for the question
@@ -53,6 +53,16 @@ class QuizBrain{
   //a getter function for the answers
   bool getAnswerValue(){
     return _questionBag[_queryNumber].questionanswer;
+  }
+  bool isFinished(){
+    if(_queryNumber == (_questionBag.length - 1)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  int reset(){
+    return _queryNumber = 0;
   }
 
 }
